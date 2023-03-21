@@ -10,9 +10,13 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Currency eur = new Currency(new CsvParser("src/main/resources/csv/EUR.csv", ';', true));
-        Currency trY = new Currency(new CsvParser("src/main/resources/csv/TRY.csv", ';', true));
-        Currency usd = new Currency(new CsvParser("src/main/resources/csv/USD.csv", ';', true));
+//        Currency eur = new Currency(new CsvParser("src/main/resources/csv/EUR.csv", ';', true));
+//        Currency trY = new Currency(new CsvParser("src/main/resources/csv/TRY.csv", ';', true));
+//        Currency usd = new Currency(new CsvParser("src/main/resources/csv/USD.csv", ';', true));
+
+        Currency eur = new Currency(new CsvParser("EUR.csv", ';', true));
+        Currency trY = new Currency(new CsvParser("TRY.csv", ';', true));
+        Currency usd = new Currency(new CsvParser("USD.csv", ';', true));
 
         Scanner in = new Scanner(System.in);
         System.out.println(

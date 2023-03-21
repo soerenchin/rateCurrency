@@ -68,7 +68,7 @@ public class CsvParser {
 
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(skipHeader).withCSVParser(parser).build();
 
-            try (csvReader) {
+            try(csvReader) {
                 for (int i = 0; i < countRow; i++) {
                     Map<String, String> map = new HashMap<>();
                     String[] row = csvReader.readNext();
