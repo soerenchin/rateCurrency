@@ -5,18 +5,21 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
 public class CsvParser {
-    private final Path filePath;
+    private final String filePath;
     private final char delimiter;
     private final int skipHeader;
 
     public CsvParser(String filePath, char delimiter, Boolean skipHeader) {
-        this.filePath = Path.of(filePath);
+        this.filePath = filePath;
         this.delimiter = delimiter;
         if (skipHeader) {
             this.skipHeader = 1;
@@ -31,7 +34,9 @@ public class CsvParser {
      * @throws Exception
      */
     public Map<String, String> getOneRow() throws Exception {
-        try (Reader reader = Files.newBufferedReader(filePath)) {
+        try (InputStream inputStream = getClass().getResourceAsStream(this.filePath)) {
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
             CSVParser parser = new CSVParserBuilder().withSeparator(this.delimiter).withIgnoreQuotations(true).build();
 
@@ -62,7 +67,9 @@ public class CsvParser {
      */
     public List<Map<String, String>> getNumberRow(int countRow) throws Exception {
         List<Map<String, String>> list = new ArrayList<>();
-        try (Reader reader = Files.newBufferedReader(filePath)) {
+        try (InputStream inputStream = getClass().getResourceAsStream(this.filePath)) {
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
             CSVParser parser = new CSVParserBuilder().withSeparator(this.delimiter).withIgnoreQuotations(true).build();
 

@@ -8,9 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CurrencyTest {
 
-    private final Currency eur = new Currency(new CsvParser("src/main/resources/csv/EUR.csv", ';', true));
-    private final Currency trY = new Currency(new CsvParser("src/main/resources/csv/TRY.csv", ';', true));
-    private final Currency usd = new Currency(new CsvParser("src/main/resources/csv/USD.csv", ';', true));
+    private final Currency eur = new Currency(new CsvParser("/csv/EUR.csv", ';', true));
+    private final Currency trY = new Currency(new CsvParser("/csv/TRY.csv", ';', true));
+    private final Currency usd = new Currency(new CsvParser("/csv/USD.csv", ';', true));
 
     public CurrencyTest() throws Exception {
     }

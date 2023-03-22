@@ -3,6 +3,7 @@ package ru.liga.system;
 import ru.liga.processes.Currency;
 import ru.liga.processes.CsvParser;
 
+import java.io.InputStream;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -14,9 +15,11 @@ public class Main {
 //        Currency trY = new Currency(new CsvParser("src/main/resources/csv/TRY.csv", ';', true));
 //        Currency usd = new Currency(new CsvParser("src/main/resources/csv/USD.csv", ';', true));
 
-        Currency eur = new Currency(new CsvParser("EUR.csv", ';', true));
-        Currency trY = new Currency(new CsvParser("TRY.csv", ';', true));
-        Currency usd = new Currency(new CsvParser("USD.csv", ';', true));
+//        InputStream inputStream = Main.class.getResourceAsStream("csv/EUR.csv");
+
+        Currency eur = new Currency(new CsvParser("/csv/EUR.csv", ';', true));
+        Currency trY = new Currency(new CsvParser("/csv/TRY.csv", ';', true));
+        Currency usd = new Currency(new CsvParser("/csv/USD.csv", ';', true));
 
         Scanner in = new Scanner(System.in);
         System.out.println(
