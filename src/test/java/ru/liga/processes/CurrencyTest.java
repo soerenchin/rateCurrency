@@ -8,9 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CurrencyTest {
 
-    private final Currency eur = new Currency(new CsvParser("/csv/EUR.csv", ';', true));
-    private final Currency trY = new Currency(new CsvParser("/csv/TRY.csv", ';', true));
-    private final Currency usd = new Currency(new CsvParser("/csv/USD.csv", ';', true));
+    private final Currency eur = new Currency(new CsvParser("/csv/EUR.csv", ';', 1));
+    private final Currency trY = new Currency(new CsvParser("/csv/TRY.csv", ';', 1));
+    private final Currency usd = new Currency(new CsvParser("/csv/USD.csv", ';', 1));
 
     public CurrencyTest() throws Exception {
     }
@@ -18,19 +18,19 @@ public class CurrencyTest {
 
     @Test
     public void rateTomorrowEUR() throws Exception {
-        assertThat(eur.getRateTomorrow())
+        assertThat(eur.calculationRateTomorrow())
                 .isEqualTo("вс 19.03.2023 80.7356");
     }
 
     @Test
     public void rateTomorrowUSD() throws Exception {
-        assertThat(usd.getRateTomorrow())
+        assertThat(usd.calculationRateTomorrow())
                 .isEqualTo("вс 19.03.2023 75.8938");
     }
 
     @Test
     public void rateTomorrowTRY() throws Exception {
-        assertThat(trY.getRateTomorrow())
+        assertThat(trY.calculationRateTomorrow())
                 .isEqualTo("вс 19.03.2023 4.0024");
     }
 
@@ -45,7 +45,7 @@ public class CurrencyTest {
         listEur.add("пт 24.03.2023 - 80.4985");
         listEur.add("сб 25.03.2023 - 80.5125");
 
-        assertThat(eur.getRateWeek())
+        assertThat(eur.calculationRateWeek())
                 .isEqualTo(listEur);
     }
 
@@ -60,7 +60,7 @@ public class CurrencyTest {
         listUsd.add("пт 24.03.2023 - 75.8146");
         listUsd.add("сб 25.03.2023 - 75.7966");
 
-        assertThat(usd.getRateWeek())
+        assertThat(usd.calculationRateWeek())
                 .isEqualTo(listUsd);
     }
 
@@ -75,7 +75,7 @@ public class CurrencyTest {
         listTry.add("пт 24.03.2023 - 1.3564");
         listTry.add("сб 25.03.2023 - 0.8032");
 
-        assertThat(trY.getRateWeek())
+        assertThat(trY.calculationRateWeek())
                 .isEqualTo(listTry);
     }
 }

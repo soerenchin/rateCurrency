@@ -19,7 +19,7 @@ public class Currency {
     public Currency(CsvParser csvParser) throws Exception {
         this.csvParser = csvParser;
 
-        Map<String, String> actualRow = csvParser.getOneRow();
+        Map<String, String> actualRow = csvParser.extractOneRow();
 
         this.nominal = Integer.parseInt(actualRow.get("nominal"));
         this.currentDate = new SimpleDateFormat("dd.MM.yyyy").parse(actualRow.get("date"));
@@ -35,10 +35,10 @@ public class Currency {
      * @return String
      * @throws Exception
      */
-    public String getRateTomorrow() throws Exception {
-        ArrayList<Double> list = csvParser.getCursByKeyForNumberRow(DIVIDER);
+    public String calculationRateTomorrow() throws Exception {
+        ArrayList<Double> list = csvParser.returnCursByKeyForNumberRow(DIVIDER);
         Double rate = Utils.round(Utils.calculateAverage(list) / this.nominal, 4);
-        String dateTomorrow = new SimpleDateFormat("E dd.MM.yyy", Locale.getDefault()).format(Utils.getTomorrowDay(this.currentDate));
+        String dateTomorrow = new SimpleDateFormat("E dd.MM.yyy", Locale.getDefault()).format(Utils.calcTomorrowDay(this.currentDate));
 
         return dateTomorrow + " " + rate;
     }
@@ -49,18 +49,18 @@ public class Currency {
      * @return ArrayList[String]
      * @throws Exception
      */
-    public ArrayList<String> getRateWeek() throws Exception {
+    public ArrayList<String> calculationRateWeek() throws Exception {
         ArrayList<String> res = new ArrayList<>();
 
-        ArrayList<Double> rateList = csvParser.getCursByKeyForNumberRow(DIVIDER);
-        Date date = Utils.getTomorrowDay(this.currentDate);
+        ArrayList<Double> rateList = csvParser.returnCursByKeyForNumberRow(DIVIDER);
+        Date date = Utils.calcTomorrowDay(this.currentDate);
 
         for (int i = 0; i < DIVIDER; i++) {
             rateList.add(Utils.round(Utils.calculateAverage(rateList) / this.nominal, 4));
             rateList.remove(0);
 
             res.add(new SimpleDateFormat("E dd.MM.yyy", Locale.getDefault()).format(date) + " - " + rateList.get(DIVIDER - 1));
-            date = Utils.getTomorrowDay(date);
+            date = Utils.calcTomorrowDay(date);
         }
 
         return res;

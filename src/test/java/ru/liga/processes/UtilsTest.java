@@ -6,9 +6,6 @@ import ru.liga.utils.Utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,7 +33,7 @@ public class UtilsTest {
         string = "22.03.2023";
         Date dateEquals = format.parse(string);
 
-        assertThat(Utils.getTomorrowDay(date))
+        assertThat(Utils.calcTomorrowDay(date))
                 .isEqualTo(dateEquals);
     }
 

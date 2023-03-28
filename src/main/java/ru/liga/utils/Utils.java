@@ -30,7 +30,7 @@ public class Utils {
      *
      * @return Date
      */
-    public static Date getTomorrowDay(Date date) {
+    public static Date calcTomorrowDay(Date date) {
         try {
             Calendar instance = Calendar.getInstance();
             instance.setTime(date);

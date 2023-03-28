@@ -8,24 +8,17 @@ import com.opencsv.CSVReaderBuilder;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class CsvParser {
     private final String filePath;
     private final char delimiter;
-    private final int skipHeader;
+    private final int countSkipLines;
 
-    public CsvParser(String filePath, char delimiter, Boolean skipHeader) {
+    public CsvParser(String filePath, char delimiter, int countSkipLines) {
         this.filePath = filePath;
         this.delimiter = delimiter;
-        if (skipHeader) {
-            this.skipHeader = 1;
-        } else {
-            this.skipHeader = 0;
-        }
+        this.countSkipLines = countSkipLines;
     }
 
     /**
@@ -33,14 +26,14 @@ public class CsvParser {
      * @return Map[String, String]]
      * @throws Exception
      */
-    public Map<String, String> getOneRow() throws Exception {
+    public Map<String, String> extractOneRow() throws Exception {
         try (InputStream inputStream = getClass().getResourceAsStream(this.filePath)) {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
             CSVParser parser = new CSVParserBuilder().withSeparator(this.delimiter).withIgnoreQuotations(true).build();
 
-            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(skipHeader).withCSVParser(parser).build();
+            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(countSkipLines).withCSVParser(parser).build();
 
             String[] res = csvReader.readNext();
 
@@ -65,7 +58,7 @@ public class CsvParser {
      * @return List[Map[String, String]]
      * @throws Exception
      */
-    public List<Map<String, String>> getNumberRow(int countRow) throws Exception {
+    public List<Map<String, String>> extractNumberRow(int countRow) throws Exception {
         List<Map<String, String>> list = new ArrayList<>();
         try (InputStream inputStream = getClass().getResourceAsStream(this.filePath)) {
 
@@ -73,7 +66,7 @@ public class CsvParser {
 
             CSVParser parser = new CSVParserBuilder().withSeparator(this.delimiter).withIgnoreQuotations(true).build();
 
-            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(skipHeader).withCSVParser(parser).build();
+            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(countSkipLines).withCSVParser(parser).build();
 
             try(csvReader) {
                 for (int i = 0; i < countRow; i++) {
@@ -100,10 +93,10 @@ public class CsvParser {
      * @return ArrayList[Double]
      * @throws Exception
      */
-    public ArrayList<Double> getCursByKeyForNumberRow(int countRow) throws Exception {
+    public ArrayList<Double> returnCursByKeyForNumberRow(int countRow) throws Exception {
         try {
             ArrayList<Double> res = new ArrayList<>();
-            for (Map<String, String> map : this.getNumberRow(countRow)) {
+            for (Map<String, String> map : this.extractNumberRow(countRow)) {
                 res.add(Double.parseDouble(map.get("curs")));
             }
             return res;
