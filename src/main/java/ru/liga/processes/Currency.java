@@ -14,6 +14,7 @@ public class Currency {
     private final CsvParser csvParser;
 
     private final int DIVIDER = 7;
+    private final int ACCURACY = 4;
 
     //constructor =================================================
     public Currency(CsvParser csvParser) throws Exception {
@@ -37,7 +38,7 @@ public class Currency {
      */
     public String calculationRateTomorrow() throws Exception {
         ArrayList<Double> list = csvParser.returnCursByKeyForNumberRow(DIVIDER);
-        Double rate = Utils.round(Utils.calculateAverage(list) / this.nominal, 4);
+        Double rate = Utils.round(Utils.calculateAverage(list) / this.nominal, ACCURACY);
         String dateTomorrow = new SimpleDateFormat("E dd.MM.yyy", Locale.getDefault()).format(Utils.calcTomorrowDay(this.currentDate));
 
         return dateTomorrow + " " + rate;
@@ -56,7 +57,7 @@ public class Currency {
         Date date = Utils.calcTomorrowDay(this.currentDate);
 
         for (int i = 0; i < DIVIDER; i++) {
-            rateList.add(Utils.round(Utils.calculateAverage(rateList) / this.nominal, 4));
+            rateList.add(Utils.round(Utils.calculateAverage(rateList) / this.nominal, ACCURACY));
             rateList.remove(0);
 
             res.add(new SimpleDateFormat("E dd.MM.yyy", Locale.getDefault()).format(date) + " - " + rateList.get(DIVIDER - 1));
