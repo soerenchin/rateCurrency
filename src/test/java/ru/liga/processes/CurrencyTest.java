@@ -2,9 +2,6 @@ package ru.liga.processes;
 
 import org.junit.Test;
 import ru.liga.service.CurrencyRate;
-import ru.liga.service.EurCurrency;
-import ru.liga.service.TurkCurrency;
-import ru.liga.service.UsdCurrency;
 import ru.liga.utils.CalculateRate;
 import ru.liga.utils.CsvParser;
 

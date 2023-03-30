@@ -28,11 +28,11 @@ public class CurrencyRate {
         }
     };
 
-    protected void printRateTomorrow() throws Exception {
+    private void printRateTomorrow() throws Exception {
         logger.info(CalculateRate.calculateTomorrowRate(this.csvParser.readAll()));
     }
 
-    protected void printRateWeek() throws Exception {
+    private void printRateWeek() throws Exception {
         CalculateRate.calculateWeekRate(this.csvParser.readAll()).forEach(logger::info);
     }
 
