@@ -1,7 +1,10 @@
 package ru.liga.processes;
 
 import org.junit.Test;
-import ru.liga.service.Currency;
+import ru.liga.service.CurrencyRate;
+import ru.liga.service.EurCurrency;
+import ru.liga.service.TurkCurrency;
+import ru.liga.service.UsdCurrency;
 import ru.liga.utils.CalculateRate;
 import ru.liga.utils.CsvParser;
 
@@ -12,9 +15,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CurrencyTest {
 
-    private final Currency eur = new Currency(new CsvParser("/csv/EUR.csv", ';'));
-    private final Currency trY = new Currency(new CsvParser("/csv/TRY.csv", ';'));
-    private final Currency usd = new Currency(new CsvParser("/csv/USD.csv", ';'));
+    private final CurrencyRate eur = new CurrencyRate(new CsvParser("/csv/EUR.csv", ';'));
+    private final CurrencyRate trY = new CurrencyRate(new CsvParser("/csv/TRY.csv", ';'));
+    private final CurrencyRate usd = new CurrencyRate(new CsvParser("/csv/USD.csv", ';'));
 
     @Test
     public void rateTomorrowEUR() throws Exception {
