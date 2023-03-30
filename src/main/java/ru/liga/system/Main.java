@@ -1,12 +1,6 @@
 package ru.liga.system;
 
-import ru.liga.processes.Command;
-import ru.liga.processes.ConsoleControler;
-import ru.liga.processes.Currency;
-import ru.liga.processes.CsvParser;
-
-import java.util.Objects;
-import java.util.Scanner;
+import ru.liga.controller.ConsoleControler;
 
 public class Main {
 
@@ -14,7 +8,7 @@ public class Main {
 
         ConsoleControler consoleControler = new ConsoleControler();
 
-        consoleControler.listen();
+        consoleControler.run();
 
     }
 

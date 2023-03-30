@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Utils {
     /**
@@ -46,7 +47,7 @@ public class Utils {
      * @param list
      * @return Double
      */
-    public static Double calculateAverage(ArrayList<Double> list) {
+    public static Double calculateAverage(List<Double> list) {
         try {
             double res = 0.0;
             for (double num : list) {

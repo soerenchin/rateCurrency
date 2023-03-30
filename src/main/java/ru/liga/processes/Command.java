@@ -6,7 +6,8 @@ public enum Command {
     RATETRYTOMORROW("rate try tomorrow"),
     RATETRYWEEK("rate try week"),
     RATEUSDTOMORROW("rate usd tomorrow"),
-    RATEUSDWEEK("rate eur week");
+    RATEUSDWEEK("rate usd week"),
+    EMPTY("empty command");
 
     private String command;
 

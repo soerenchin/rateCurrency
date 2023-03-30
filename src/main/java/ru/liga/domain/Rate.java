@@ -1,4 +1,4 @@
-package ru.liga.processes;
+package ru.liga.domain;
 
 import java.util.Date;
 
@@ -26,13 +26,5 @@ public class Rate {
 
     public Double getCurs() {
         return this.curs;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String toString() {
-        return "Номинал: " + this.nominal + " \nДата: " + this.date + "\nКурс: " + this.curs + "\nНазвание: " + this.name;
     }
 }
