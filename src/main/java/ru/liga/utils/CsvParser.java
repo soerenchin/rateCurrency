@@ -47,11 +47,7 @@ public class CsvParser {
             }
         });
 
-        if (rateList.size() != 0) {
-            return rateList;
-        } else {
-            throw new Exception("Error in parsing csv file");
-        }
+        return rateList;
     }
 
     private List<String> formatRow(String[] row) {

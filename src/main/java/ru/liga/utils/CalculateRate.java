@@ -13,18 +13,17 @@ public class CalculateRate {
     private static final int ACCURACY = 4;
 
     public static String calculateTomorrowRate(List<Rate> rateList) {
-        List<Double> cursList = new ArrayList<>();
-        rateList.subList(0,7).forEach(rate -> {
-            cursList.add(rate.getCurs());
-        });
+        List<Double> cursList = extractCurs(rateList.subList(0, DIVIDER));
         Date tomorrowDate = Utils.calcTomorrowDay(rateList.get(0).getDate());
+
         Double rate = Utils.round(Utils.calculateAverage(cursList) / rateList.get(0).getNominal(), ACCURACY);
+
         return new SimpleDateFormat("E dd.MM.yyy", Locale.getDefault()).format(tomorrowDate) + " " + rate;
     }
 
     public static List<String> calculateWeekRate(List<Rate> rateList) {
         List<String> weekRate = new ArrayList<>();
-        List<Double> cursList = extractCurs(rateList.subList(0,7));
+        List<Double> cursList = extractCurs(rateList.subList(0,DIVIDER));
         Date date = Utils.calcTomorrowDay(rateList.get(0).getDate());
 
         for (int i = 0; i < DIVIDER; i++) {

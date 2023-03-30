@@ -2,6 +2,7 @@ package ru.liga.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.liga.processes.Command;
 import ru.liga.utils.CalculateRate;
 import ru.liga.utils.CsvParser;
 import ru.liga.domain.Rate;
