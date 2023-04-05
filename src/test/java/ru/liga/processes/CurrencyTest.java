@@ -18,20 +18,20 @@ public class CurrencyTest {
 
     @Test
     public void rateTomorrowEUR() throws Exception {
-        assertThat(CalculateRate.calculateTomorrowRate(eur.getRateList()))
-                .isEqualTo("вс 19.03.2023 80.7356");
+        assertThat(eur.rateTomorrow().toString())
+                .isEqualTo("вс 19.03.2023 - 80.7356");
     }
 
     @Test
     public void rateTomorrowUSD() throws Exception {
-        assertThat(CalculateRate.calculateTomorrowRate(usd.getRateList()))
-                .isEqualTo("вс 19.03.2023 75.8938");
+        assertThat(usd.rateTomorrow().toString())
+                .isEqualTo("вс 19.03.2023 - 75.8938");
     }
 
     @Test
     public void rateTomorrowTRY() throws Exception {
-        assertThat(CalculateRate.calculateTomorrowRate(trY.getRateList()))
-                .isEqualTo("вс 19.03.2023 4.0024");
+        assertThat(trY.rateTomorrow().toString())
+                .isEqualTo("вс 19.03.2023 - 4.0024");
     }
 
     @Test
@@ -45,7 +45,11 @@ public class CurrencyTest {
         listEur.add("пт 24.03.2023 - 80.4985");
         listEur.add("сб 25.03.2023 - 80.5125");
 
-        assertThat(CalculateRate.calculateWeekRate(eur.getRateList()))
+        List<String> rateWeek = new ArrayList<>();
+
+        eur.rateWeek().forEach(value -> rateWeek.add(value.toString()));
+
+        assertThat(rateWeek)
                 .isEqualTo(listEur);
     }
 
@@ -60,7 +64,11 @@ public class CurrencyTest {
         listUsd.add("пт 24.03.2023 - 75.8146");
         listUsd.add("сб 25.03.2023 - 75.7966");
 
-        assertThat(CalculateRate.calculateWeekRate(usd.getRateList()))
+        List<String> rateWeek = new ArrayList<>();
+
+        usd.rateWeek().forEach(value -> rateWeek.add(value.toString()));
+
+        assertThat(rateWeek)
                 .isEqualTo(listUsd);
     }
 
@@ -71,11 +79,15 @@ public class CurrencyTest {
         listTry.add("пн 20.03.2023 - 3.4834");
         listTry.add("вт 21.03.2023 - 2.9579");
         listTry.add("ср 22.03.2023 - 2.4297");
-        listTry.add("чт 23.03.2023 - 1.898");
+        listTry.add("чт 23.03.2023 - 1.8980");
         listTry.add("пт 24.03.2023 - 1.3564");
         listTry.add("сб 25.03.2023 - 0.8032");
 
-        assertThat(CalculateRate.calculateWeekRate(trY.getRateList()))
+        List<String> rateWeek = new ArrayList<>();
+
+        trY.rateWeek().forEach(value -> rateWeek.add(value.toString()));
+
+        assertThat(rateWeek)
                 .isEqualTo(listTry);
     }
 }

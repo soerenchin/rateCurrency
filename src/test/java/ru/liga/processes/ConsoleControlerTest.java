@@ -11,43 +11,50 @@ public class ConsoleControlerTest {
     @Test
     public void parseCommandTest1() {
         ConsoleControler consoleControler = new ConsoleControler();
-        assertThat(consoleControler.parseCommand("rate EUR tomorrow"))
-                .isEqualTo(Command.RATEEURTOMORROW);
+        assertThat(consoleControler.parseCommand("RATE"))
+                .isEqualTo(Command.RATE);
     }
 
     @Test
     public void parseCommandTest2() {
         ConsoleControler consoleControler = new ConsoleControler();
-        assertThat(consoleControler.parseCommand("rate USD tomorrow"))
-                .isEqualTo(Command.RATEUSDTOMORROW);
+        assertThat(consoleControler.parseCommand("RAT"))
+                .isEqualTo(Command.EMPTY);
     }
 
     @Test
     public void parseCommandTest3() {
         ConsoleControler consoleControler = new ConsoleControler();
-        assertThat(consoleControler.parseCommand("rate TRY tomorrow"))
-                .isEqualTo(Command.RATETRYTOMORROW);
+        assertThat(consoleControler.parseСurrency("TRY"))
+                .isEqualTo(Currency.TRY);
     }
 
     @Test
     public void parseCommandTest4() {
         ConsoleControler consoleControler = new ConsoleControler();
-        assertThat(consoleControler.parseCommand("rate EUR week"))
-                .isEqualTo(Command.RATEEURWEEK);
+        assertThat(consoleControler.parseСurrency("EUR"))
+                .isEqualTo(Currency.EUR);
     }
 
     @Test
     public void parseCommandTest5() {
         ConsoleControler consoleControler = new ConsoleControler();
-        assertThat(consoleControler.parseCommand("rate USD week"))
-                .isEqualTo(Command.RATEUSDWEEK);
+        assertThat(consoleControler.parseСurrency("USD"))
+                .isEqualTo(Currency.USD);
     }
 
     @Test
     public void parseCommandTest6() {
         ConsoleControler consoleControler = new ConsoleControler();
-        assertThat(consoleControler.parseCommand("rate TRY week"))
-                .isEqualTo(Command.RATETRYWEEK);
+        assertThat(consoleControler.parseInterval("WEEK"))
+                .isEqualTo(Interval.WEEK);
+    }
+
+    @Test
+    public void parseCommandTest7() {
+        ConsoleControler consoleControler = new ConsoleControler();
+        assertThat(consoleControler.parseInterval("TOMORROW"))
+                .isEqualTo(Interval.TOMORROW);
     }
 
 }

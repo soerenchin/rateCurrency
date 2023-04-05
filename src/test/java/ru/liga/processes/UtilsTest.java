@@ -3,6 +3,7 @@ package ru.liga.processes;
 import org.junit.Test;
 import ru.liga.utils.Utils;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,19 +12,6 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UtilsTest {
-
-    @Test
-    public void roundTest1() {
-        assertThat(Utils.round(5.55555, 4))
-                .isEqualTo(5.5556);
-    }
-
-    @Test
-    public void roundTest2() {
-        assertThat(Utils.round(5.55554, 4))
-                .isEqualTo(5.5555);
-    }
-
     @Test
     public void getTomorrowDayTest() throws ParseException {
         String string = "21.03.2023";
@@ -39,18 +27,27 @@ public class UtilsTest {
 
     @Test
     public void calculateAverageTest1() {
-        ArrayList<Double> as = new ArrayList<>(Arrays.asList(1.0, 2.0, 3.0, 4.0));
+        List<BigDecimal> as = new ArrayList<>();
+        as.add(new BigDecimal("1.0"));
+        as.add(new BigDecimal("2.0"));
+        as.add(new BigDecimal("3.0"));
+        as.add(new BigDecimal("4.0"));
 
         assertThat(Utils.calculateAverage(as))
-                .isEqualTo(2.5);
+                .isEqualTo(new BigDecimal("2.5"));
     }
 
     @Test
     public void calculateAverageTest2() {
-        ArrayList<Double> as = new ArrayList<>(Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0));
+        List<BigDecimal> as = new ArrayList<>();
+        as.add(new BigDecimal("1.0"));
+        as.add(new BigDecimal("2.0"));
+        as.add(new BigDecimal("3.0"));
+        as.add(new BigDecimal("4.0"));
+        as.add(new BigDecimal("5.0"));
 
         assertThat(Utils.calculateAverage(as))
-                .isEqualTo(3.0);
+                .isEqualTo(new BigDecimal("3.0"));
     }
 
 

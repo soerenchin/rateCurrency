@@ -9,24 +9,6 @@ import java.util.List;
 
 public class Utils {
     /**
-     * round - Метод, для округления double
-     * @param value - значение для округления
-     * @param places - Число разрядов после запятой
-     * @return Double
-     */
-    public static Double round(Double value, int places) {
-        try {
-            if (places < 0) throw new IllegalArgumentException();
-
-            BigDecimal bd = new BigDecimal(Double.toString(value));
-            bd = bd.setScale(places, RoundingMode.HALF_UP);
-            return bd.doubleValue();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * getTomorrowDay - Метод, возвращающий завтрашнюю дату"
      *
      * @return Date
@@ -47,13 +29,13 @@ public class Utils {
      * @param list
      * @return Double
      */
-    public static Double calculateAverage(List<Double> list) {
+    public static BigDecimal calculateAverage(List<BigDecimal> list) {
         try {
-            double res = 0.0;
-            for (double num : list) {
-                res += num;
+            BigDecimal res = new BigDecimal(0);
+            for (BigDecimal num : list) {
+                res = res.add(num);
             }
-            return res / list.size();
+            return res.divide(BigDecimal.valueOf(list.size()), RoundingMode.HALF_EVEN);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

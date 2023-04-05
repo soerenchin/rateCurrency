@@ -1,20 +1,21 @@
 package ru.liga.controller;
 
-import ru.liga.processes.Command;
 import ru.liga.processes.Currency;
 import ru.liga.processes.Interval;
 import ru.liga.service.CurrencyRate;
 import ru.liga.utils.CsvParser;
 
 public class CurrencyControler {
-    private final Command command;
+    private final Currency currency;
+    private final Interval interval;
 
-    public CurrencyControler(Command command) {
-        this.command=command;
+    public CurrencyControler(Currency currency, Interval interval) {
+        this.currency = currency;
+        this.interval = interval;
     }
 
     public void runCommand() throws Exception {
-        Character delimiter = ';';
+        char delimiter = ';';
         String fileEurPath = "/csv/EUR.csv";
         String fileTryPath = "/csv/TRY.csv";
         String fileUsdPath = "/csv/USD.csv";
@@ -23,13 +24,10 @@ public class CurrencyControler {
         CurrencyRate trY = new CurrencyRate(new CsvParser(fileTryPath, delimiter));
         CurrencyRate usd = new CurrencyRate(new CsvParser(fileUsdPath, delimiter));
 
-        String currencyValue = command.toString().split(" ")[1].toUpperCase();
-        String intervalValue = command.toString().split(" ")[2].toUpperCase();
-
-        switch (Currency.valueOf(currencyValue)) {
-            case EUR -> eur.runCommand(Interval.valueOf(intervalValue));
-            case USD -> usd.runCommand(Interval.valueOf(intervalValue));
-            case TRY -> trY.runCommand(Interval.valueOf(intervalValue));
+        switch (this.currency) {
+            case EUR -> eur.printRateInterval(interval);
+            case USD -> usd.printRateInterval(interval);
+            case TRY -> trY.printRateInterval(interval);
         }
     }
 

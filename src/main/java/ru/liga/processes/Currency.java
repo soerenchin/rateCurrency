@@ -1,5 +1,5 @@
 package ru.liga.processes;
 
 public enum Currency {
-    EUR, USD, TRY
+    EUR, USD, TRY, EMPTY
 }

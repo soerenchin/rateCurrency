@@ -9,6 +9,7 @@ import ru.liga.domain.Rate;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -38,10 +39,17 @@ public class CsvParser {
                 List<String> row = formatRow(value);
                 int nominal = Integer.parseInt(row.get(0));
                 Date date = formatter.parse(row.get(1));
-                double curs = Double.parseDouble(row.get(2));
+                BigDecimal curs = new BigDecimal(row.get(2));
                 String name = row.get(3);
 
-                rateList.add(new Rate(nominal, date, curs, name));
+                rateList.add(
+                        Rate.builder()
+                                .nominal(nominal)
+                                .date(date)
+                                .curs(curs)
+                                .name(name)
+                                .build()
+                );
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }

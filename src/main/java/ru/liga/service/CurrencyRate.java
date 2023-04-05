@@ -21,22 +21,18 @@ public class CurrencyRate {
     }
     //=============================================================
 
-    public void runCommand(Interval interval) throws Exception {
+    public void printRateInterval(Interval interval) throws Exception {
         switch (interval) {
-            case TOMORROW -> this.printRateTomorrow();
-            case WEEK -> this.printRateWeek();
+            case TOMORROW -> logger.info(this.rateTomorrow().toString());
+            case WEEK -> this.rateWeek().forEach(rate -> logger.info(rate.toString()));
         }
     };
 
-    private void printRateTomorrow() throws Exception {
-        logger.info(CalculateRate.calculateTomorrowRate(this.csvParser.readAll()));
+    public Rate rateTomorrow() throws Exception {
+        return CalculateRate.calculateTomorrowRate(this.csvParser.readAll());
     }
 
-    private void printRateWeek() throws Exception {
-        CalculateRate.calculateWeekRate(this.csvParser.readAll()).forEach(logger::info);
-    }
-
-    public List<Rate> getRateList() throws Exception {
-        return this.csvParser.readAll();
+    public List<Rate> rateWeek() throws Exception {
+        return CalculateRate.calculateWeekRate(this.csvParser.readAll());
     }
 }
