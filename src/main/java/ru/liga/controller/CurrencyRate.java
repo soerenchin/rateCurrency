@@ -1,11 +1,11 @@
-package ru.liga.service;
+package ru.liga.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.liga.processes.Interval;
-import ru.liga.utils.CalculateRate;
-import ru.liga.utils.CsvParser;
 import ru.liga.domain.Rate;
+import ru.liga.service.CalculateRate;
+import ru.liga.service.CsvParser;
 import ru.liga.system.Main;
 
 import java.util.*;
@@ -24,7 +24,7 @@ public class CurrencyRate {
     public void printRateInterval(Interval interval) throws Exception {
         switch (interval) {
             case TOMORROW -> logger.info(this.rateTomorrow().toString());
-            case WEEK -> this.rateWeek().forEach(rate -> logger.info(rate.toString()));
+            case WEEK, MONTH -> this.rateWeek(interval.getInterval()).forEach(rate -> logger.info(rate.toString()));
         }
     };
 
@@ -32,7 +32,7 @@ public class CurrencyRate {
         return CalculateRate.calculateTomorrowRate(this.csvParser.readAll());
     }
 
-    public List<Rate> rateWeek() throws Exception {
-        return CalculateRate.calculateWeekRate(this.csvParser.readAll());
+    public List<Rate> rateWeek(int interval) throws Exception {
+        return CalculateRate.calculateIntervalRate(this.csvParser.readAll(), interval);
     }
 }

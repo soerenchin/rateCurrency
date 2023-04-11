@@ -21,7 +21,7 @@ public class UtilsTest {
         string = "22.03.2023";
         Date dateEquals = format.parse(string);
 
-        assertThat(Utils.calcTomorrowDay(date))
+        assertThat(calcTomorrowDay(date))
                 .isEqualTo(dateEquals);
     }
 
@@ -33,7 +33,7 @@ public class UtilsTest {
         as.add(new BigDecimal("3.0"));
         as.add(new BigDecimal("4.0"));
 
-        assertThat(Utils.calculateAverage(as))
+        assertThat(calculateAverage(as))
                 .isEqualTo(new BigDecimal("2.5"));
     }
 
@@ -46,7 +46,7 @@ public class UtilsTest {
         as.add(new BigDecimal("4.0"));
         as.add(new BigDecimal("5.0"));
 
-        assertThat(Utils.calculateAverage(as))
+        assertThat(calculateAverage(as))
                 .isEqualTo(new BigDecimal("3.0"));
     }
 

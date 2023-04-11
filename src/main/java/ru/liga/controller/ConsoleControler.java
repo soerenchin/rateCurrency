@@ -12,10 +12,11 @@ import java.util.*;
 
 public class ConsoleControler {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final String consoleOutput = "Введите команду или 'exit' для выхода: \n Шаблон команды: [rate] [eur, usd, try] [tomorrow, week, month]";
 
     public void run() throws Exception {
         var scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-        logger.info("Введите команду или 'exit' для выхода: \n Шаблон команды: [rate] [eur, usd, try] [tomorrow, week]");
+        logger.info(consoleOutput);
 
         while (scanner.hasNextLine()) {
             String inLine = scanner.nextLine().toUpperCase();
@@ -24,7 +25,7 @@ public class ConsoleControler {
                 System.exit(0);
             } else if (inLine.split("\\s+").length < 3) {
                 logger.info("Некорректная команда ...'");
-                logger.info("Введите команду или 'exit' ... \n Шаблон команды: [rate] [eur, usd, try] [tomorrow, week]");
+                logger.info(consoleOutput);
             } else {
                 Command command = parseCommand(inLine.split("\\s+")[0]);
                 Currency currency = parseСurrency(inLine.split("\\s+")[1]);
@@ -32,7 +33,7 @@ public class ConsoleControler {
                 if (command != Command.EMPTY && currency != Currency.EMPTY && interval != Interval.EMPTY) {
                     runCommand(currency, interval);
                 }
-                logger.info("Введите команду или 'exit' ... \n Шаблон команды: [rate] [eur, usd, try] [tomorrow, week]");
+                logger.info(consoleOutput);
             }
         }
     }

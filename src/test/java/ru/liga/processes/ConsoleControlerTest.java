@@ -2,7 +2,6 @@ package ru.liga.processes;
 
 import org.junit.Test;
 import ru.liga.controller.ConsoleControler;
-import ru.liga.utils.CalculateRate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

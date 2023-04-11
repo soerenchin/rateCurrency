@@ -1,4 +1,4 @@
-package ru.liga.utils;
+package ru.liga.service;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
@@ -19,9 +19,9 @@ public class CsvParser {
     private final char delimiter;
     private final int COUNT_SKIP_LINES = 1;
 
-    public CsvParser(String filePath, char delimiter) {
+    public CsvParser(String filePath) {
         this.filePath = filePath;
-        this.delimiter = delimiter;
+        this.delimiter = ';';
     }
 
     public List<Rate> readAll() throws Exception {

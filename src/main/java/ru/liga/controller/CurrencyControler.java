@@ -2,8 +2,8 @@ package ru.liga.controller;
 
 import ru.liga.processes.Currency;
 import ru.liga.processes.Interval;
-import ru.liga.service.CurrencyRate;
-import ru.liga.utils.CsvParser;
+
+import static ru.liga.controller.CurrencyFactory.*;
 
 public class CurrencyControler {
     private final Currency currency;
@@ -15,14 +15,9 @@ public class CurrencyControler {
     }
 
     public void runCommand() throws Exception {
-        char delimiter = ';';
-        String fileEurPath = "/csv/EUR.csv";
-        String fileTryPath = "/csv/TRY.csv";
-        String fileUsdPath = "/csv/USD.csv";
-
-        CurrencyRate eur = new CurrencyRate(new CsvParser(fileEurPath, delimiter));
-        CurrencyRate trY = new CurrencyRate(new CsvParser(fileTryPath, delimiter));
-        CurrencyRate usd = new CurrencyRate(new CsvParser(fileUsdPath, delimiter));
+        CurrencyRate eur = createEurCurrency();
+        CurrencyRate trY = createTryCurrency();
+        CurrencyRate usd = createUsdCurrency();
 
         switch (this.currency) {
             case EUR -> eur.printRateInterval(interval);

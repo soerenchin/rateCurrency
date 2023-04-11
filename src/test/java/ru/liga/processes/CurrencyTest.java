@@ -1,9 +1,8 @@
 package ru.liga.processes;
 
 import org.junit.Test;
-import ru.liga.service.CurrencyRate;
-import ru.liga.utils.CalculateRate;
-import ru.liga.utils.CsvParser;
+import ru.liga.controller.CurrencyRate;
+import ru.liga.service.CsvParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CurrencyTest {
 
-    private final CurrencyRate eur = new CurrencyRate(new CsvParser("/csv/EUR.csv", ';'));
-    private final CurrencyRate trY = new CurrencyRate(new CsvParser("/csv/TRY.csv", ';'));
-    private final CurrencyRate usd = new CurrencyRate(new CsvParser("/csv/USD.csv", ';'));
+    private final CurrencyRate eur = new CurrencyRate(new CsvParser("/csv/EUR.csv"));
+    private final CurrencyRate trY = new CurrencyRate(new CsvParser("/csv/TRY.csv"));
+    private final CurrencyRate usd = new CurrencyRate(new CsvParser("/csv/USD.csv"));
 
     @Test
     public void rateTomorrowEUR() throws Exception {
@@ -47,7 +46,7 @@ public class CurrencyTest {
 
         List<String> rateWeek = new ArrayList<>();
 
-        eur.rateWeek().forEach(value -> rateWeek.add(value.toString()));
+        eur.rateWeek(7).forEach(value -> rateWeek.add(value.toString()));
 
         assertThat(rateWeek)
                 .isEqualTo(listEur);
@@ -66,7 +65,7 @@ public class CurrencyTest {
 
         List<String> rateWeek = new ArrayList<>();
 
-        usd.rateWeek().forEach(value -> rateWeek.add(value.toString()));
+        usd.rateWeek(7).forEach(value -> rateWeek.add(value.toString()));
 
         assertThat(rateWeek)
                 .isEqualTo(listUsd);
@@ -85,7 +84,7 @@ public class CurrencyTest {
 
         List<String> rateWeek = new ArrayList<>();
 
-        trY.rateWeek().forEach(value -> rateWeek.add(value.toString()));
+        trY.rateWeek(7).forEach(value -> rateWeek.add(value.toString()));
 
         assertThat(rateWeek)
                 .isEqualTo(listTry);
